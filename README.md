@@ -111,12 +111,8 @@ smart-healthcare-assistant/
 ## (Optional Improvements)
 
 - Switch to GPT-4 for more accurate medical insights.
-- Add new agents (e.g., appointment manager, diet tracker).
+
 
 ---
 
 ---
-
-This version is written in a professional tone but sounds natural, like a human would document the project.
-
-Would you like me to generate the matching `requirements.txt` file next?
