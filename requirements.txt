@@ -1,0 +1,9 @@
+streamlit
+python-dotenv
+requests
+langchain
+openai
+sqlite3
+transformers
+accelerate
+sentencepiece
