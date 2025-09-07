@@ -106,7 +106,7 @@ smart-healthcare-assistant/
 └── README.md                       # Project documentation
 
 ```
-![Diagram of Smart Healthcare Assistant](data/Screenshot 2025-09-08 005923.png)
+![Diagram of Smart Healthcare Assistant](data/pl.png)
 
 
 
