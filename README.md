@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-# Smart Healthcare Assistant
-Minimal multi-agent system for symptom analysis.
-=======
-# 🩺 Smart Healthcare Assistant
+
+# 🩺 Smart Healthcare Assistant (multi-agent system)
 
 A multi-agent AI-powered healthcare assistant designed to help users understand their health symptoms, receive simple medical explanations, get lifestyle advice, and manage health reminders — all in an easy and automated way.
 
@@ -119,5 +116,3 @@ smart-healthcare-assistant/
 
 ---
 
----
->>>>>>> f00d61c419b178fbe05abcf5e74ecf3f90e2064d
