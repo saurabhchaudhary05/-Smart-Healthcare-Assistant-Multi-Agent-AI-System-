@@ -105,18 +105,12 @@ smart-healthcare-assistant/
 ├── requirements.txt                # Python dependencies
 └── README.md                       # Project documentation
 
-```
+
 ![Diagram of Smart Healthcare Assistant](data/pl.png)
 
-
-
-
----
 
 ## (Optional Improvements)
 
 - Switch to GPT-4 for more accurate medical insights.
 
-
----
 
