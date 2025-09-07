@@ -30,9 +30,13 @@ load_dotenv()
 
 class MedicalKnowledgeAgent:
     def __init__(self):
+        openai_api_key = os.getenv("OPENAI_API_KEY")
+        if not openai_api_key:
+            raise ValueError("OPENAI_API_KEY not found in environment variables. Check your .env file.")
+
         self.llm = OpenAI(
             model_name="gpt-3.5-turbo",
-            openai_api_key=os.getenv("OPENAI_API_KEY"),
+            openai_api_key=openai_api_key,
             temperature=0.5
         )
         self.prompt = PromptTemplate(
@@ -44,6 +48,13 @@ class MedicalKnowledgeAgent:
     def fetch(self, symptoms):
         knowledge = []
         for s in symptoms:
-            info = self.chain.invoke({"symptom": s})
+            try:
+                info = self.chain.invoke({"symptom": s})
+            except Exception as e:
+                if "RateLimit" in str(e) or "quota" in str(e):
+                    info = "API quota exhausted or rate limit reached."
+                else:
+                    info = f"Error: {str(e)}"
             knowledge.append({"symptom": s, "info": info})
-        return {"knowledge": knowledge}
+        return {"knowledge": knowledge, "status": "success"}
+

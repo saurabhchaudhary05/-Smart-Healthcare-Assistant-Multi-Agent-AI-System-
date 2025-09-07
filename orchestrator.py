@@ -34,27 +34,37 @@
 #             'reminders': reminders
 #         }
 
-from agents.symptom_agent import SymptomCheckerAgent
 from agents.knowledge_agent import MedicalKnowledgeAgent
 from agents.lifestyle_agent import LifestyleCoachAgent
 from agents.scheduler_agent import SchedulerAgent
 
 class OrchestratorAgent:
     def __init__(self):
-        self.symptom_checker = SymptomCheckerAgent()
         self.knowledge_agent = MedicalKnowledgeAgent()
         self.lifestyle_agent = LifestyleCoachAgent()
         self.scheduler_agent = SchedulerAgent()
 
-    def process(self, symptoms):
-        triage = self.symptom_checker.analyze(symptoms)
+    def process_user_input(self, symptoms):
+        # 1️⃣ Medical knowledge
         knowledge = self.knowledge_agent.fetch(symptoms)
-        lifestyle_advice = self.lifestyle_agent.provide_advice(symptoms)
-        reminders = self.scheduler_agent.set_reminders(symptoms, lifestyle_advice["advice_list"])
+
+        # 2️⃣ Lifestyle advice
+        lifestyle = self.lifestyle_agent.provide_advice(symptoms)
+
+        # 3️⃣ Set reminders
+        reminders = self.scheduler_agent.set_reminders(lifestyle["lifestyle_advice"])
+
+        # 4️⃣ Dummy triage (example logic)
+        triage = []
+        for s in symptoms:
+            level = "low"
+            if any(word in s.lower() for word in ["fever", "pain", "chest"]):
+                level = "medium"
+            triage.append({"symptom": s, "triage_level": level})
 
         return {
-            "symptom_analysis": triage,
-            "medical_knowledge": knowledge,
-            "lifestyle_advice": lifestyle_advice,
+            "triage": triage,
+            "knowledge": knowledge,
+            "lifestyle": lifestyle,
             "reminders": reminders
         }

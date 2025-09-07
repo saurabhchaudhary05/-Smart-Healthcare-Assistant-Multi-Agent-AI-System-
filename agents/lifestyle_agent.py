@@ -15,7 +15,6 @@
 
 #         return {'lifestyle_advice': advice, 'status': 'success'}
 
-
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.llms import OpenAI
@@ -26,10 +25,11 @@ load_dotenv()
 
 class LifestyleCoachAgent:
     def __init__(self):
+        openai_api_key = os.getenv("OPENAI_API_KEY")
         self.llm = OpenAI(
             model_name="gpt-3.5-turbo",
-            openai_api_key=os.getenv("OPENAI_API_KEY"),
-            temperature=0.5
+            openai_api_key=openai_api_key,
+            temperature=0.7
         )
         self.prompt = PromptTemplate(
             input_variables=["symptom"],
@@ -40,6 +40,12 @@ class LifestyleCoachAgent:
     def provide_advice(self, symptoms):
         advice_list = []
         for s in symptoms:
-            advice = self.chain.invoke({"symptom": s})
+            try:
+                advice = self.chain.invoke({"symptom": s})
+            except Exception as e:
+                if "RateLimit" in str(e) or "quota" in str(e):
+                    advice = "API quota exhausted or rate limit reached."
+                else:
+                    advice = f"Error: {str(e)}"
             advice_list.append({"symptom": s, "advice": advice})
-        return {"advice_list": advice_list}
+        return {"lifestyle_advice": advice_list, "status": "success"}

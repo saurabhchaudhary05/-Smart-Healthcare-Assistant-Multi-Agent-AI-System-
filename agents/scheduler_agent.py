@@ -34,36 +34,15 @@
 
 #         return {'reminder': f"Reminder set for '{symptom}' advice.", 'status': 'success'}
 
-
-import sqlite3
 from datetime import datetime, timedelta
-
 class SchedulerAgent:
-    def __init__(self):
-        self.conn = sqlite3.connect("database.sqlite", check_same_thread=False)
-        self.cursor = self.conn.cursor()
-        self.cursor.execute('''
-            CREATE TABLE IF NOT EXISTS reminders (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                symptom TEXT,
-                advice TEXT,
-                reminder_time TEXT
-            )
-        ''')
-        self.conn.commit()
-
-    def set_reminders(self, symptoms, advice_list):
+    def set_reminders(self, lifestyle_advice):
         reminders = []
-        for symptom, advice in zip(symptoms, advice_list):
-            reminder_time = (datetime.now() + timedelta(hours=6)).strftime('%Y-%m-%d %H:%M:%S')
-            self.cursor.execute('''
-                INSERT INTO reminders (symptom, advice, reminder_time)
-                VALUES (?, ?, ?)
-            ''', (symptom, advice['advice']))
-            self.conn.commit()
+        for item in lifestyle_advice:
+            reminder_time = datetime.now() + timedelta(hours=1)
             reminders.append({
-                "symptom": symptom,
-                "advice": advice['advice'],
-                "reminder_time": reminder_time
+                "symptom": item["symptom"],
+                "advice": item["advice"],
+                "reminder_time": reminder_time.strftime("%Y-%m-%d %H:%M:%S")
             })
-        return {"reminders": reminders}
+        return {"reminders": reminders, "status": "success"}
