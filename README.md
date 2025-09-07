@@ -1,5 +1,5 @@
 
-# 🩺 Smart Healthcare Assistant (multi-agent system)
+# 🩺 Smart Healthcare Assistant (multi-agent AI system)
 
 A multi-agent AI-powered healthcare assistant designed to help users understand their health symptoms, receive simple medical explanations, get lifestyle advice, and manage health reminders — all in an easy and automated way.
 
@@ -106,6 +106,10 @@ smart-healthcare-assistant/
 └── README.md                       # Project documentation
 
 ```
+<img width="2858" height="1136" alt="Screenshot 2025-09-08 005923" src="https://github.com/user-attachments/assets/a34ac3d7-fa4d-4182-9030-7f6ad7d54c87" />
+
+<img width="2853" height="1172" alt="Screenshot 2025-09-08 005934" src="https://github.com/user-attachments/assets/ce0f4028-6950-41c4-99ef-2296b2121abc" />
+
 
 ---
 
